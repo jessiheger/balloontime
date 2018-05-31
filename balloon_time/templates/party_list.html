@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h4 class="list">Current Parties:</h4>
+    {% for party in parties %}
+    <a href="/{{party.id}}/">
+        <h4 class="partytitle">{{ party.title }}</h4>
+    </a>
+    {{ party.description }}
+    {% endfor %}
+
+<h4 class="list">Current Clowns:</h4>
+    {% for clown in clowns %}
+    <a href="/{{clown.id}}/">
+        <h4 class="partytitle">{{ clown.name }}</h4>
+    </a>
+    {{ clown.description }}
+    {% endfor %}
+
+<h4 class="partytitle">Add a Party!</h4>
+<form action="post_party/" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+
+<h4 class="partytitle">Register a Clown!</h4>
+<form action="post_clown/" method="post">
+    {% csrf_token %}
+    {{ clown_form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+{% endblock %}

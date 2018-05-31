@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ party.title }}{% endblock %}
+
+{% block content %}
+<article>
+  <h2 class="partytitle">{{ party.title }}</h2>
+  {{ party.description }}
+  <form action="{% url 'party_delete' party.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete">
+  </form>
+  <form action="{% url 'party_update' party.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Update">
+  </form>
+
+  <section>
+    <h4 class="partytitle list">The performing clowns:</h4>
+    {% for clown in party.clown_set.all %}
+      <h5>{{ clown.name }}</h5>
+      {{ clown.description }}
+    {% endfor %}
+  </section>
+  <!-- ADDING A CLOWN TO A PARTY - not currently working -->
+  <h4 class="partytitle">Add another clown(s) to this party:</h4>
+  <form action="{% url 'party_detail' party.id %}" method="post" >
+    {% csrf_token %}
+    <ul id='availableclowns'>
+      {% for clown in clowns %}
+      <li>{{clown.name}} - ID of: {{clown.id}}</li>
+      <button data-target={{clown.id}} type="submit" value="Update">Add this clown</button>
+      {% endfor %}
+    </ul>
+    <!-- <input type="submit" value="Add a clown!"> -->
+  </form>
+</article>
+{% endblock %}

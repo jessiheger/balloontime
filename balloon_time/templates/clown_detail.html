@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ clown.name }}{% endblock %}
+
+{% block content %}
+<article>
+  <h2 class="partytitle">{{ clown.name }}</h2>
+  {{ clown.description }}
+
+  <!-- <section>
+    <h4 class="partytitle list">This clown's parties:</h4>
+    {% for party in clown.parties %}
+    <a href="/{{party.id}}/">
+        <h4 class="partytitle">{{ party.title }}</h4>
+    </a>
+    {{ party.description }}
+    {% endfor %}
+  </section> -->
+</article>
+{% endblock %}
